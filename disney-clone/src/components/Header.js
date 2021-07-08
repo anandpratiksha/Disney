@@ -1,40 +1,81 @@
 import styled from 'styled-components'
+import { auth, provider } from '../firebase';
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom';
+import { selectUserName, selectUserPhoto, selectLoginDetails, setUserLoginDetails } from '../features/user/userSlice'
+
 
 const Header = (props) => {
+
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const userName = useSelector(selectUserName);
+    const userPhoto = useSelector(selectUserPhoto);
+
+    const handleAuth = () => {
+        auth.signInWithPopup(provider)
+            .then((result) => {
+                setUser(result.user)
+            })
+            .catch((error) => {
+                console(error.message);
+            });
+    };
+
+    const setUser = (user) => {
+        dispatch(
+            setUserLoginDetails({
+                name: user.displayName,
+                email: user.email,
+                photo: user.photoUrl,
+            })
+        );
+    };
+
     return (
         <Nav>
             <Logo>
                 <img src="/images/logo.svg" alt="" />
             </Logo>
-            <NavMenu>
-                <a>
-                    <img src="/images/home-icon.png" alt="" />
-                    <span>HOME</span>
-                </a>
-                <a>
-                    <img src="/images/search-icon.svg" alt="" />
-                    <span>SEARCH</span>
-                </a>
-                <a>
-                    <img src="/images/watchlist.png" alt="" />
-                    <span>WATCHLIST</span>
-                </a>
-                <a>
-                    <img src="/images/original-icon.png" alt="" />
-                    <span>ORIGINALS</span>
-                </a>
-                <a>
-                    <img src="/images/movie-icon.png" alt="" />
-                    <span>MOVIES</span>
-                </a>
-                <a>
-                    <img src="/images/series-icon.png" alt="" />
-                    <span>SERIES</span>
-                </a>
-            </NavMenu>
-            <Login>Login</Login>
+            {
+                !userName ? (
+                    <Login onClick={handleAuth}>Login</Login>
+                    ) : (
+                    <>
+                        <NavMenu>
+                            <a>
+                                <img src="/images/home-icon.png" alt="" />
+                                <span>HOME</span>
+                            </a>
+                            <a>
+                                <img src="/images/search-icon.svg" alt="" />
+                                <span>SEARCH</span>
+                            </a>
+                            <a>
+                                <img src="/images/watchlist.png" alt="" />
+                                <span>WATCHLIST</span>
+                            </a>
+                            <a>
+                                <img src="/images/original-icon.png" alt="" />
+                                <span>ORIGINALS</span>
+                            </a>
+                            <a>
+                                <img src="/images/movie-icon.png" alt="" />
+                                <span>MOVIES</span>
+                            </a>
+                            <a>
+                                <img src="/images/series-icon.png" alt="" />
+                                <span>SERIES</span>
+                            </a>
+                        </NavMenu>
+                        <UserImg src={userPhoto} alt={userName} />
+                        console.log(userPhoto);
+                        console.log(userName);
+
+                    </>
+                    )}
         </Nav>
-    )
+    );
 };
 
 const Nav = styled.nav`
@@ -146,4 +187,14 @@ cursor:pointer;
     border-color:transparent;
 }
 `;
+
+const UserImg = styled.img`
+height: 100%;
+`;
+
+// const UserImg = styled.img`
+
+// `;const UserImg = styled.img`
+
+// `;
 export default Header;
