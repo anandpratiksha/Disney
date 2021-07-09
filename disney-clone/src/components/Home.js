@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import ImgSlider from './ImgSlider'
+import ImgSlider from '../components/ImgSlider'
 
 const Home = (props) => {
     return (
