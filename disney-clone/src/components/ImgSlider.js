@@ -4,38 +4,38 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick';
 
 const ImgSlider = (props) => {
-    let settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slideToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-    }
-    return (
-        <Carousel {...settings}>
-            <Wrap>
-                <a>
-                    <img src="/images/slider-badag.jpg" alt="" />
-                </a>
-            </Wrap>
-            <Wrap>
-                <a>
-                    <img src="/images/slider-badging.jpg" alt="" />
-                </a>
-            </Wrap>
-            <Wrap>
-                <a>
-                    <img src="/images/slider-scale.jpg" alt="" />
-                </a>
-            </Wrap>
-            <Wrap>
-                <a>
-                    <img src="/images/slider-scales.jpg" alt="" />
-                </a>
-            </Wrap>
-        </Carousel>
-    );
+  let settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slideToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+  }
+  return (
+    <Carousel {...settings}>
+      <Wrap>
+        <a>
+          <img src="/images/slider-badag.jpg" alt="" />
+        </a>
+      </Wrap>
+      <Wrap>
+        <a>
+          <img src="/images/slider-badging.jpg" alt="" />
+        </a>
+      </Wrap>
+      <Wrap>
+        <a>
+          <img src="/images/slider-scale.jpg" alt="" />
+        </a>
+      </Wrap>
+      <Wrap>
+        <a>
+          <img src="/images/slider-scales.jpg" alt="" />
+        </a>
+      </Wrap>
+    </Carousel>
+  );
 };
 
 
@@ -89,7 +89,7 @@ a{
     }
     &:hover{
         padding:0;
-        border:4px solid rgba(249, 249, 249, 249, 0.8);
+        border:4px solid white;
         transition-duration: 300ms;
     }
 }
