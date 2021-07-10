@@ -9,6 +9,11 @@ const Detail = (props) => {
             <ImageTitle>
                 <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/F70235E3463A6F246EB462ED5379F9D41D6318E80098BD40900E7AFC1C7D932D/scale?width=1440&aspectRatio=1.78" alt="" />
             </ImageTitle>
+            <ContentMeta>
+                <Controls>
+
+                </Controls>
+            </ContentMeta>
         </Container>
 
     );
@@ -56,4 +61,17 @@ img{
     width:35vw;
 }
 `;
+
+const ContentMeta = styled.div`
+max-width: 874px;;
+`;
+
+const Controls = styled.div`
+align-items: center;
+display:flex;
+flex-flow:row nowrap;
+margin:24px 0px;
+min-height: 56px;
+`;
+
 export default Detail;
