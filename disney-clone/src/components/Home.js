@@ -2,6 +2,9 @@ import styled from 'styled-components'
 import ImgSlider from '../components/ImgSlider'
 import Viewers from '../components/Viewers'
 import Recommends from '../components/Recommends'
+import NewDisney from '../components/NewDisney'
+import Originals from '../components/Originals'
+import Trending from '../components/Trending'
 
 const Home = (props) => {
     return (
@@ -9,6 +12,9 @@ const Home = (props) => {
             <ImgSlider />
             <Viewers />
             <Recommends />
+            <NewDisney />
+            <Originals />
+            <Trending />
         </Container>
     )
 };

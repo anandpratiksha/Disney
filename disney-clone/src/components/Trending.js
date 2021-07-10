@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'
 
-const NewDisney = (props) => {
+const Trending = (props) => {
     return (
         <Container>
-            <h4>New to Disney+</h4>
+            <h4>Trending</h4>
             <Content>
                 <Wrap>
                     <Link to='/'>
@@ -80,4 +80,4 @@ img {
 }
 `;
 
-export default NewDisney;
+export default Trending;
