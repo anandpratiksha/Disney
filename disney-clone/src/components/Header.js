@@ -73,7 +73,7 @@ const Header = (props) => {
                                 <span>SEARCH</span>
                             </a>
                             <a>
-                                <img src="/images/watchlist.png" alt="" />
+                                <img src="/images/watchlist-icon.png" alt="" />
                                 <span>WATCHLIST</span>
                             </a>
                             <a>

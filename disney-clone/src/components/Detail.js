@@ -1,13 +1,33 @@
 import styled from 'styled-components'
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom'
+import db from '../firebase';
 
 const Detail = (props) => {
+    const { id } = useParams();
+    const [detailData, setDetailData] = useState({});
+
+    useEffect(() => {
+        db.collection('movies').doc(id)
+            .get()
+            .then((doc) => {
+                if (doc.exists) {
+                    setDetailData(doc.data());
+                } else {
+                    console.log("No Such Data In firebase")
+                }
+            })
+            .catch((err) => {
+                console.log("Error in getting data", err)
+            })
+    }, [id])
     return (
         <Container>
             <Background>
-                <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/FA1548A6B82C9991B1D38DF251A388FEA2483904510FBC73E150F67F7BDE38C0/scale?width=1440&aspectRatio=1.78&format=jpeg" alt="" />
+                <img src={detailData.backgroundImg} alt={detailData.title} />
             </Background>
             <ImageTitle>
-                <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/F70235E3463A6F246EB462ED5379F9D41D6318E80098BD40900E7AFC1C7D932D/scale?width=1440&aspectRatio=1.78" alt="" />
+                <img src={detailData.titleImg} alt={detailData.title} />
             </ImageTitle>
             <ContentMeta>
                 <Controls>
@@ -23,7 +43,18 @@ const Detail = (props) => {
                         <span />
                         <span />
                     </AddList>
+                    <Groupwatch>
+                        <div>
+                            <img src="/images/group-icon.png" alt="" />
+                        </div>
+                    </Groupwatch>
                 </Controls>
+                <SubTitle>
+                    {detailData.subTitle}
+                </SubTitle>
+                <Description>
+                    {detailData.description}
+                </Description>
             </ContentMeta>
         </Container>
 
@@ -141,6 +172,61 @@ background-color: rgba(0, 0,0, 0.6);
 border-radius: 50%;
 border:2px solid white;
 cursor:pointer;
+span{
+    background-color: rgb(249, 249, 249);
+    display:inline-block;
+    &:first-child{
+        height: 2px;
+        transform: translate(1px, 0px) rotate(0deg);
+        width:16px;
+    }
+    &:nth-child(2){
+        transform: translate(-8px) rotate(0deg);
+        height: 16px;
+        width:2px;
+    }
+}
 `;
+
+const Groupwatch = styled.div`
+height: 44px;
+width: 44px;
+border-radius: 50%;
+display: flex;
+justify-content:center;
+align-items:center;
+cursor:pointer;
+background: white;
+div{
+    height: 40px;
+    width: 40px;
+    background: rgb(0,0,0);
+    border-radius: 50%;
+    img{
+        width: 100%;
+    }
+}
+`;
+
+const SubTitle = styled.div`
+color: rgb(249, 249, 249);
+font-size:15px;
+min-height:20px;
+
+@media (min-width){
+    font-size:12px;
+}
+`;
+const Description = styled.div`
+color: rgb(249, 249, 249);
+font-size:20px;
+line-height:1.4;
+padding: 16px 0px;
+
+@media (min-width){
+    font-size:14px;
+}
+`;
+
 
 export default Detail;
