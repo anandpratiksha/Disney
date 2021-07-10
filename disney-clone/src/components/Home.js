@@ -1,56 +1,59 @@
-import styled from 'styled-components'
-import ImgSlider from '../components/ImgSlider'
-import Viewers from '../components/Viewers'
-import Recommends from '../components/Recommends'
-import NewDisney from '../components/NewDisney'
-import Originals from '../components/Originals'
-import Trending from '../components/Trending'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import db from '../firebase';
-import { setMovies } from '../features/movie/movieSlice'
-import { selectUserName } from '../features/user/userSlice'
+
+import styled from "styled-components";
+import ImgSlider from "./ImgSlider";
+import NewDisney from "./NewDisney";
+import Originals from "./Originals";
+import Recommends from "./Recommends";
+import Trending from "./Trending";
+import Viewers from "./Viewers";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import db from "../firebase";
+import { setMovies } from "../features/movie/movieSlice";
+import { selectUserName } from "../features/user/userSlice";
 
 const Home = (props) => {
     const dispatch = useDispatch();
     const userName = useSelector(selectUserName);
     let recommends = [];
-    let newDisney = [];
+    let newDisneys = [];
     let originals = [];
     let trending = [];
 
     useEffect(() => {
-        db.collection('movies').onSnapshot((snapshot) => {
+        console.log("hello");
+        db.collection("movies").onSnapshot((snapshot) => {
             snapshot.docs.map((doc) => {
+                console.log(recommends);
                 switch (doc.data().type) {
-                    case 'recommend':
-                        recommends.push({ id: doc.id, ...doc.data() })
+                    case "recommend":
+                        recommends = [...recommends, { id: doc.id, ...doc.data() }];
                         break;
 
-                    case 'new':
-                        newDisneys.push({ id: doc.id, ...doc.data() })
+                    case "new":
+                        newDisneys = [...newDisneys, { id: doc.id, ...doc.data() }];
                         break;
 
-                    case 'original':
-                        originals.push({ id: doc.id, ...doc.data() })
+                    case "original":
+                        originals = [...originals, { id: doc.id, ...doc.data() }];
                         break;
 
-                    case 'trending':
-                        trending.push({ id: doc.id, ...doc.data() })
+                    case "trending":
+                        trending = [...trending, { id: doc.id, ...doc.data() }];
                         break;
                 }
             });
-        });
-        dispatch(
-            setMovies({
-                recommend: recommends,
-                newDisney: newDisneys,
-                original: originals,
-                trending: trending,
-            })
-        );
-    });
 
+            dispatch(
+                setMovies({
+                    recommend: recommends,
+                    newDisney: newDisneys,
+                    original: originals,
+                    trending: trending,
+                })
+            );
+        });
+    }, [userName]);
     return (
         <Container>
             <ImgSlider />
@@ -80,13 +83,6 @@ opacity:1;
 z-index:-1;
 }
 `;
-
-
-// const  = styled.``;
-// const  = styled.``;
-// const  = styled.``;
-// const  = styled.``;
-// const  = styled.``;
 
 
 export default Home
