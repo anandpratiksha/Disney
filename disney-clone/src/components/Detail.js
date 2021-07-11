@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import db from '../firebase';
+import { Link } from 'react-router-dom'
+
 
 const Detail = (props) => {
     const { id } = useParams();
@@ -37,7 +39,7 @@ const Detail = (props) => {
                     </Player>
                     <Trailer>
                         <img src="/images/play-icon-white.png" alt="" />
-                        <span>Trailer</span>
+                        <span><a href={detailData.video} target="_blank">Trailer</a></span>
                     </Trailer>
                     <AddList>
                         <span />
@@ -56,6 +58,9 @@ const Detail = (props) => {
                     {detailData.description}
                 </Description>
             </ContentMeta>
+            <Link to='/home'>
+                <Button>Back to Movies !!</Button>
+            </Link>
         </Container>
 
     );
@@ -228,5 +233,18 @@ padding: 16px 0px;
 }
 `;
 
+const Button = styled.div`
+height:30px;
+background-color:black;
+width:9rem;
+display: flex;
+justify-content:center;
+padding: 5px;
+
+&:hover{
+    border-radius: 9px;
+    border:2px solid pink;
+}
+`;
 
 export default Detail;

@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+
 
 const Login = (props) => {
     return (
@@ -6,7 +8,11 @@ const Login = (props) => {
             <Content>
                 <CTA>
                     <CTALogoOne src="/images/cta-logo-one.svg" alt="" />
-                    <SignUp>GET ALL THERE</SignUp>
+                    <SignUp>
+                        <Link to='/home'>
+                            GET ALL THERE
+                        </Link>
+                    </SignUp>
                     <Description>
                         Get Premier Access to Raya & the Last Dragon for an additional fee with a Disney+ subscription....
                     </Description>

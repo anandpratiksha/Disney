@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 import { selectUserName, selectUserPhoto, selectLoginDetails, setUserLoginDetails, setSignOutState } from '../features/user/userSlice'
+import { Link } from 'react-router-dom'
 
 
 const Header = (props) => {
@@ -56,7 +57,9 @@ const Header = (props) => {
     return (
         <Nav>
             <Logo>
-                <img src="/images/logo.svg" alt="" />
+                <Link to='/'>
+                    <img src="/images/logo.svg" alt="" />
+                </Link>
             </Logo>
             {
                 !userName ? (
@@ -64,10 +67,12 @@ const Header = (props) => {
                 ) : (
                     <>
                         <NavMenu>
-                            <a>
-                                <img src="/images/home-icon.png" alt="" />
-                                <span>HOME</span>
-                            </a>
+                            <Link to='/'>
+                                <a>
+                                    <img src="/images/home-icon.png" alt="" />
+                                    <span>HOME</span>
+                                </a>
+                            </Link>
                             <a>
                                 <img src="/images/search-icon.svg" alt="" />
                                 <span>SEARCH</span>
@@ -133,21 +138,18 @@ img{
 const NavMenu = styled.div`
 align-items:center;
 display:flex;
-flex-row:row nowrap;
+flex:row nowrap;
 height:100%;
 justify-content:flex-end;
 margin:0px;
 padding:0px;
 position:relative;
-marging-right:auto;
 margin-left:25px;
 cursor:pointer;
-
 a{
     display:flex;
     align-items:center;
     padding:0 12px;
-
     img {
         height:20px;
         min-width:20px;
@@ -180,7 +182,6 @@ a{
         left:0px;
     }
 }
-
 &:hover{
   span:before{
       transform: scaleX(1);
@@ -189,9 +190,9 @@ a{
   }  
 }
 }
-${'' /* @media(max-width:768px){
+ @media(max-width:768px){
     display:none;
-} */}
+} 
 `;
 
 const Login = styled.a`
@@ -203,7 +204,6 @@ border:1px solid #f9f9f9;
 border-radius:4px;
 transition: all 0.2s ease 0s;
 cursor:pointer;
-
 &:hover{
     background-color:#f9f9f9;
     color:#000;
@@ -250,4 +250,5 @@ ${UserImg}{
     }
 }
 `;
+
 export default Header;
