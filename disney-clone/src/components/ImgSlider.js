@@ -94,5 +94,4 @@ a{
     }
 }
 `;
-
 export default ImgSlider;
